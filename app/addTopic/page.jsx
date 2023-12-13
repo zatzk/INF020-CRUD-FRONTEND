@@ -1,0 +1,15 @@
+
+export default function AddTopic() {
+  return (
+    <form className="flex flex-col gap-3">
+      <select>
+        <option value="user">User</option>
+        <option value="teacher">Teacher</option>
+      </select>
+      <input className="border border-slate-500 px-8 py-2" type="text" placeholder="ID" />
+      <input className="border border-slate-500 px-8 py-2" type="text" placeholder="Name" />
+
+      <button className="bg-green-600 font-bold text-white py-3 px-6 w-fit">Add</button>
+    </form>
+  )
+}
