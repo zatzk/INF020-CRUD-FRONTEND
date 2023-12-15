@@ -1,18 +1,26 @@
-'use client'
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import RemoveBtn from "./RemoveBtn";
-import {HiPencilAlt} from "react-icons/hi"
-import { useEffect } from "react";
+import { HiPencilAlt } from "react-icons/hi";
 
 export default function TeacherList() {
+  const [teachers, setTeachers] = useState([]);
+
   useEffect(() => {
     fetch("http://localhost:5000/api/teachers")
-    .then((res) => res.json())
-    .then((data) => setTeachers(data))
-  }, [])
+      .then((res) => res.json())
+      .then((data) => setTeachers(data));
+  }, []);
 
-  const [teachers, setTeachers] = useState([])
+  const handleRemove = (teacherId) => {
+    // Assuming you have a function to handle removal and update state locally
+    // You can implement similar logic for editing or other operations
+    removeTeacherLocally(teacherId);
+  };
+
+  const removeTeacherLocally = (teacherId) => {
+    setTeachers((prevTeachers) => prevTeachers.filter((teacher) => teacher.id !== teacherId));
+  };
 
   return (
     <>
@@ -24,13 +32,13 @@ export default function TeacherList() {
           </div>
 
           <div className="flex gap-2">
-            <RemoveBtn />
+            <RemoveBtn id={teacher.id} onRemove={() => handleRemove(teacher.id)} />
             <Link href={`/editTopic/${teacher.id}`}>
-              <HiPencilAlt size={24}/>
+              <HiPencilAlt size={24} />
             </Link>
           </div>
         </div>
       ))}
     </>
-  )
+  );
 }

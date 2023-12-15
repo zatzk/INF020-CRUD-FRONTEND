@@ -1,14 +1,14 @@
 'use client';
 import { useState } from 'react';
 import axios from 'axios';
+import { useAppContext } from '../contexts/context';
 
-export default function EditTopicForm() {
-  const [id, setId] = useState('');
+export default function EditTopicForm({ onTopicUpdate }) {
+  const { showUsersList } = useAppContext();
+  const objectType = showUsersList ? 'users' : 'teachers';
+
+  // Remove ID from state and handle function
   const [name, setName] = useState('');
-
-  const handleIdChange = (event) => {
-    setId(event.target.value);
-  };
 
   const handleNameChange = (event) => {
     setName(event.target.value);
@@ -16,7 +16,8 @@ export default function EditTopicForm() {
 
   const handleUpdateButtonClick = async () => {
     try {
-      const apiUrl = `http://localhost:5000/api/topics/${id}`;
+      const apiUrl = `http://localhost:5000/api/${objectType}/${id}`;
+      console.log('API URL:', apiUrl);
 
       const requestBody = {
         name: name,
@@ -24,6 +25,11 @@ export default function EditTopicForm() {
 
       // Send PUT request
       const response = await axios.put(apiUrl, requestBody);
+
+      // Update local state using the callback function
+      if (onTopicUpdate) {
+        onTopicUpdate(response.data);
+      }
 
       // Additional logic based on the response, if needed
 
@@ -35,13 +41,14 @@ export default function EditTopicForm() {
 
   return (
     <form className="flex flex-col gap-3">
-      <input
+      {/* Remove input for ID */}
+      {/* <input
         className="border border-slate-500 px-8 py-2"
         type="text"
         placeholder="ID"
         value={id}
         onChange={handleIdChange}
-      />
+      /> */}
       <input
         className="border border-slate-500 px-8 py-2"
         type="text"

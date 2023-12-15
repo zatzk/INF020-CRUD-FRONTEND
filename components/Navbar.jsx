@@ -7,7 +7,7 @@ import { useAppContext } from '../contexts/context';
 export default function Navbar() {
   const { showUsersList, toggleUsersList } = useAppContext();
 
-  const title = showUsersList  ? 'Users' : 'Teachers';
+  const title = showUsersList  ? 'users' : 'teachers';
 
   return (
     <NextUIProvider>

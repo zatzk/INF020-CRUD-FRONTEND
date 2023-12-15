@@ -14,6 +14,16 @@ export default function UsersList() {
 
   const [users, setUsers] = useState([])
 
+  const handleRemove = (userId) => {
+    // Assuming you have a function to handle removal and update state locally
+    // You can implement similar logic for editing or other operations
+    removeUserLocally(userId);
+  };
+
+  const removeUserLocally = (userId) => {
+    setUsers((prevUsers) => prevUsers.filter((user) => user.id !== userId));
+  };
+
   return (
     <>
       {users.map((user) => (
@@ -24,7 +34,7 @@ export default function UsersList() {
           </div>
 
           <div className="flex gap-2">
-            <RemoveBtn />
+            <RemoveBtn id={user.id} onRemove={() => handleRemove(user.id)}/>
             <Link href={`/editTopic/${user.id}`}>
               <HiPencilAlt size={24}/>
             </Link>
