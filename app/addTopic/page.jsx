@@ -21,7 +21,7 @@ export default function AddTopic() {
 
   const handleAddButtonClick = async () => {
     try {
-      const apiUrl = `https://72fe1aeb-a9af-4e6c-8b25-2efe3b6cecd2.mock.pstmn.io/${userType}s/`;
+      const apiUrl = `http://localhost:5000/api/${userType}s/`;
 
       const requestBody = {
         id: id,

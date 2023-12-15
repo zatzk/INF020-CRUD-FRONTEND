@@ -7,7 +7,7 @@ import { useEffect } from "react";
 
 export default function UsersList() {
   useEffect(() => {
-    fetch("https://72fe1aeb-a9af-4e6c-8b25-2efe3b6cecd2.mock.pstmn.io/users")
+    fetch("http://localhost:5000/api/users/")
     .then((res) => res.json())
     .then((data) => setUsers(data))
   }, [])

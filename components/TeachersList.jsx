@@ -7,7 +7,7 @@ import { useEffect } from "react";
 
 export default function TeacherList() {
   useEffect(() => {
-    fetch("https://72fe1aeb-a9af-4e6c-8b25-2efe3b6cecd2.mock.pstmn.io/teachers")
+    fetch("http://localhost:5000/api/teachers")
     .then((res) => res.json())
     .then((data) => setTeachers(data))
   }, [])
